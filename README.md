@@ -1,2 +1,4 @@
 # ISAGeneration
-python file to generate ISA test runs
+This is a python file to generate batch files to run ISA processing on the input file list.
+The batch file will call c++ program ISAFil1 to filter ISA fastq or fasta files (1 or more files may be combined into one test here) based on read quality, LTR/vector sequence. ISAFil1 also combines exact duplicates and outputs a fasta file. BLAT is run on the fasta file to align each read to a target genome, the output is file.blast8.  The python script blast8toAln.py is run on on the blast8 file to filter it down to file.aln. The c++ program ISAErrorCorrect is then called to combine matching alignments and also to run error correction on insertions with similar sequences. Once all individual tests are completed, the c++ program buildGlobalISA is run. This program reads in the results of all test files, does some more error correction to identify matching insertions that were aligned to different locations...due to repetitive DNA, and builds a master list of all alignments and their counts. ISAFil1, ISAErrorCorrent and BuildGlobalISA are in their own repositories.
+
